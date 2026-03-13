@@ -352,28 +352,45 @@ The agent follows the Markdown instructions in `SKILL.md`, optionally loading re
 
 ### 7.3 Maximum Portability Strategy
 
-To make a single skill work across all three major agents:
+To maximize portability and keep a single canonical source of truth for each skill, prefer `.agents/skills/` as the canonical location.
+
+When creating Agent Skills (`SKILL.md`), always:
+
+- Create the skill in `.agents/skills/<skill-name>/SKILL.md` (**canonical source** — widest cross-agent reach: Claude Code, Copilot, Codex, Gemini CLI)
+- Create symlinks in `.claude/skills/` and `.agent/skills/`, pointing to `../../.agents/skills/<skill-name>`
 
 #### Project level
 
 ```bash
-# Canonical location (Claude Code native)
-.claude/skills/my-skill/SKILL.md
+# Canonical source
+.agents/skills/my-skill/SKILL.md
 
-# Symlinks for cross-agent discovery
-ln -s ../../.claude/skills/my-skill .github/skills/my-skill
-ln -s ../../.claude/skills/my-skill .agents/skills/my-skill
+# Symlinks
+ln -s ../../.agents/skills/my-skill .claude/skills/my-skill
+ln -s ../../.agents/skills/my-skill .agent/skills/my-skill
+```
+
+#### Optional native Copilot path
+
+```bash
+ln -s ../../.agents/skills/my-skill .github/skills/my-skill
 ```
 
 #### User level
 
 ```bash
-# Canonical location
-~/.claude/skills/my-skill/SKILL.md
+# Canonical source
+~/.agents/skills/my-skill/SKILL.md
 
 # Symlinks
-ln -s ~/.claude/skills/my-skill ~/.agents/skills/my-skill
-ln -s ~/.claude/skills/my-skill ~/.copilot/skills/my-skill
+ln -s ~/.agents/skills/my-skill ~/.claude/skills/my-skill
+ln -s ~/.agents/skills/my-skill ~/.agent/skills/my-skill
+```
+
+#### Optional native Copilot path at user level
+
+```bash
+ln -s ~/.agents/skills/my-skill ~/.copilot/skills/my-skill
 ```
 
 ---
