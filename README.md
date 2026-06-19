@@ -357,7 +357,7 @@ To maximize portability and keep a single canonical source of truth for each ski
 When creating Agent Skills (`SKILL.md`), always:
 
 - Create the skill in `.agents/skills/<skill-name>/SKILL.md` (**canonical source** — widest cross-agent reach: Claude Code, Copilot, Codex, Gemini CLI)
-- Create symlinks in `.claude/skills/` and `.agent/skills/`, pointing to `../../.agents/skills/<skill-name>`
+- Create a symlink in `.claude/skills/`, pointing to `../../.agents/skills/<skill-name>`
 
 #### Project level
 
@@ -367,7 +367,6 @@ When creating Agent Skills (`SKILL.md`), always:
 
 # Symlinks
 ln -s ../../.agents/skills/my-skill .claude/skills/my-skill
-ln -s ../../.agents/skills/my-skill .agent/skills/my-skill
 ```
 
 #### Optional native Copilot path
@@ -384,7 +383,6 @@ ln -s ../../.agents/skills/my-skill .github/skills/my-skill
 
 # Symlinks
 ln -s ~/.agents/skills/my-skill ~/.claude/skills/my-skill
-ln -s ~/.agents/skills/my-skill ~/.agent/skills/my-skill
 ```
 
 #### Optional native Copilot path at user level

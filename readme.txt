@@ -315,14 +315,13 @@ Agent follows the Markdown instructions in `SKILL.md`, optionally loading refere
 When creating Agent Skills (`SKILL.md`), always:
 
 - Create the skill in `.agents/skills/<skill-name>/SKILL.md` (canonical source — widest cross-agent reach: Claude Code, Copilot, Codex, Gemini CLI)
-- Create symlinks in `.claude/skills/`, `.agent/skills/`, pointing to `../../.agents/skills/<skill-name>`
+- Create a symlink in `.claude/skills/`, pointing to `../../.agents/skills/<skill-name>`
 
 **Recommended project-level layout:**
 
 ```text
 .agents/skills/my-skill/SKILL.md          # canonical source
 .claude/skills/my-skill -> ../../.agents/skills/my-skill
-.agent/skills/my-skill  -> ../../.agents/skills/my-skill
 ```
 
 **Optional additional symlink for native Copilot path:**
@@ -334,11 +333,10 @@ When creating Agent Skills (`SKILL.md`), always:
 **Example commands:**
 
 ```bash
-mkdir -p .agents/skills .claude/skills .agent/skills
+mkdir -p .agents/skills .claude/skills
 mkdir -p .agents/skills/my-skill
 
 ln -s ../../.agents/skills/my-skill .claude/skills/my-skill
-ln -s ../../.agents/skills/my-skill .agent/skills/my-skill
 
 # Optional for native Copilot path
 ln -s ../../.agents/skills/my-skill .github/skills/my-skill
@@ -349,7 +347,6 @@ At user level:
 ```text
 ~/.agents/skills/my-skill/SKILL.md        # canonical source
 ~/.claude/skills/my-skill -> ~/.agents/skills/my-skill
-~/.agent/skills/my-skill  -> ~/.agents/skills/my-skill
 ```
 
 Optional:
